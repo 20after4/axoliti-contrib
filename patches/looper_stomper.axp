@@ -1,0 +1,353 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="sss/dist/saturator" uuid="41495e37-8b0a-41cf-8119-ddc58734e89f" name="saturator_1" x="812" y="42">
+      <params>
+         <frac32.u.map name="amp" value="32.5"/>
+         <frac32.u.map name="strength" value="6.5"/>
+         <frac32.u.map name="max" value="19.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="sss/dist/saturator" uuid="41495e37-8b0a-41cf-8119-ddc58734e89f" name="saturator_2" x="1190" y="42">
+      <params>
+         <frac32.u.map name="amp" value="11.5"/>
+         <frac32.u.map name="strength" value="15.5"/>
+         <frac32.u.map name="max" value="23.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="FEEDBACK" x="630" y="56">
+      <params>
+         <frac32.u.map name="value" value="27.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="714" y="56">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="rbrt/old/looper_FB_mono" uuid="de42afeb-d1c7-4de1-9225-a216e22501c5" name="looper_FB_mono_1" x="994" y="56">
+      <params/>
+      <attribs>
+         <objref attributeName="table" obj="t1"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="70" y="112" text="hit REC to start recording a new loop"/>
+   <zombie type="delay" uuid="zombie" name="delay_1" x="1316" y="140"/>
+   <comment type="patch/comment" x="126" y="168" text="after recording,the loop plays automatically."/>
+   <obj type="audio/out stereo" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="1414" y="182">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="112" y="196" text="hit PLAY shortly to start/stop the loop,"/>
+   <comment type="patch/comment" x="112" y="210" text="hit PLAY long to toggle overdubbing into the loop."/>
+   <comment type="patch/comment" x="448" y="224" text="FEEDBACK:"/>
+   <comment type="patch/comment" x="448" y="238" text="if set to less then &apos;64&apos;,the loop will gradually decay."/>
+   <obj type="table/alloc 32b sdram" uuid="1a4546b7b52747ea765093ac97444601c44721e8" name="t1" x="238" y="252">
+      <params/>
+      <attribs>
+         <combo attributeName="size" selection="1048576"/>
+         <text attributeName="init">
+            <sText><![CDATA[]]></sText>
+         </text>
+      </attribs>
+   </obj>
+   <obj type="math/+" uuid="faedbea4612d9bd3644d6d3bf31946d848a70e19" name="+_1" x="1190" y="252">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/in/digital" uuid="f59f139e8da912742832dc541157f20f30b7ac1b" name="digital_1" x="420" y="280">
+      <params/>
+      <attribs>
+         <combo attributeName="pad" selection="PC5"/>
+         <combo attributeName="mode" selection="pullup"/>
+      </attribs>
+   </obj>
+   <obj type="rbrt/control/speedlim" uuid="67c994de-e8ef-47f7-823a-4956d72fb5c2" name="speedlim_1" x="518" y="280">
+      <params>
+         <frac32.s.map name="d" value="22.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop toggle" uuid="195e489e5fc3d275944b0de56c7a91c8641ea22a" name="flipflop_1" x="672" y="280">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="REC state" x="798" y="280">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/button" uuid="ef3d13774349df85aa9bfecf30dbc91ab8488b3f" name="SAVE" x="70" y="294">
+      <params>
+         <bool32.mom name="b" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="140" y="322" text="hit SAVE to write the loop to sd-card"/>
+   <obj type="stomps/chorus1" uuid="406dd92b-4f35-4a47-9114-299724252b05" name="obj_2" x="1400" y="336">
+      <params>
+         <bool32.tgl name="on" value="1"/>
+         <frac32.u.map name="depth" value="11.0"/>
+         <frac32.s.map name="speed" value="-20.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/button" uuid="ef3d13774349df85aa9bfecf30dbc91ab8488b3f" name="LOAD" x="70" y="364">
+      <params>
+         <bool32.mom name="b" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="140" y="364" text="hit load to load the loop from sd-card"/>
+   <obj type="gpio/in/digital" uuid="f59f139e8da912742832dc541157f20f30b7ac1b" name="digital_3" x="420" y="378">
+      <params/>
+      <attribs>
+         <combo attributeName="pad" selection="PC1"/>
+         <combo attributeName="mode" selection="pullup"/>
+      </attribs>
+   </obj>
+   <obj type="rbrt/control/speedlim" uuid="67c994de-e8ef-47f7-823a-4956d72fb5c2" name="speedlim_2" x="518" y="378">
+      <params>
+         <frac32.s.map name="d" value="-12.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop toggle" uuid="195e489e5fc3d275944b0de56c7a91c8641ea22a" name="flipflop_4" x="672" y="378">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="PLAY state" x="798" y="378">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="table/load" uuid="600cc22c6734d23a82620da1a14e78782a7e168e" name="load_1" x="238" y="392">
+      <params/>
+      <attribs>
+         <objref attributeName="table" obj="t1"/>
+      </attribs>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="c_1" x="14" y="448">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="myloop.wav"/>
+      </attribs>
+   </obj>
+   <obj type="gpio/in/digital" uuid="f59f139e8da912742832dc541157f20f30b7ac1b" name="digital_2" x="420" y="476">
+      <params/>
+      <attribs>
+         <combo attributeName="pad" selection="PC2"/>
+         <combo attributeName="mode" selection="pullup"/>
+      </attribs>
+   </obj>
+   <obj type="rbrt/control/speedlim" uuid="67c994de-e8ef-47f7-823a-4956d72fb5c2" name="speedlim_3" x="518" y="476">
+      <params>
+         <frac32.s.map name="d" value="-12.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop toggle" uuid="195e489e5fc3d275944b0de56c7a91c8641ea22a" name="flipflop_2" x="672" y="476">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_2" x="798" y="476">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="OD state" x="896" y="476">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="table/save" uuid="3e4108b607d56d9e1cd10abb898b58eea11e53b2" name="save_1" x="238" y="490">
+      <params/>
+      <attribs>
+         <objref attributeName="table" obj="t1"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="42" y="588" text="HOW does the patch remeber the length of the loop you recorded?"/>
+   <obj type="logic/latch" uuid="2a50e4657301542464c6a97931847b5e8e0e6d2b" name="latch_1" x="1246" y="588">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="bool_2" x="1358" y="588">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="42" y="602" text="ha-ha!!"/>
+   <comment type="patch/comment" x="42" y="630" text="the loop-length is stored as the last sample of the table you&apos;re recording into."/>
+   <comment type="patch/comment" x="42" y="658" text="so,when you transfer the loop to some of these fancy &apos;DAW&apos;-programs "/>
+   <obj type="gpio/in/digital" uuid="f59f139e8da912742832dc541157f20f30b7ac1b" name="digital_4" x="896" y="658">
+      <params/>
+      <attribs>
+         <combo attributeName="pad" selection="PC4"/>
+         <combo attributeName="mode" selection="pullup"/>
+      </attribs>
+   </obj>
+   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="bool_1" x="994" y="658">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="sss/ctrl/buttonFunctions" uuid="cf74f184-5959-47eb-a9b5-9dd2e3794cbc" name="buttonFunctions_1" x="1078" y="658">
+      <params>
+         <int32 name="time" value="134"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="42" y="672" text="on your shiny new SUPERMAC,you will hear a nasty CLICK at the end of the loop."/>
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_1" x="1372" y="672">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="42" y="686" text="this is just the loop-length."/>
+   <obj type="tiar/HW/OLED128x64" uuid="5bde8c3d-fe37-40b3-848e-edb192767bc8" name="OLED128x64_1" x="700" y="686">
+      <params/>
+      <attribs>
+         <objref attributeName="scope" obj=""/>
+         <combo attributeName="type" selection="SSD1306"/>
+         <combo attributeName="I2CADDR" selection="0x78"/>
+      </attribs>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="c_2" x="504" y="700">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="test 1 2 3"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_2" x="532" y="784">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <nets>
+      <net>
+         <source obj="flipflop_1" outlet="o"/>
+         <dest obj="REC state" inlet="in"/>
+         <dest obj="looper_FB_mono_1" inlet="rec"/>
+      </net>
+      <net>
+         <source obj="flipflop_4" outlet="o"/>
+         <dest obj="PLAY state" inlet="in"/>
+         <dest obj="and_2" inlet="i1"/>
+         <dest obj="looper_FB_mono_1" inlet="play"/>
+      </net>
+      <net>
+         <source obj="flipflop_2" outlet="o"/>
+         <dest obj="and_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="and_2" outlet="o"/>
+         <dest obj="OD state" inlet="in"/>
+         <dest obj="looper_FB_mono_1" inlet="dub"/>
+      </net>
+      <net>
+         <source obj="c_1" outlet="out"/>
+         <dest obj="save_1" inlet="filename"/>
+         <dest obj="load_1" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="LOAD" outlet="o"/>
+         <dest obj="load_1" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="SAVE" outlet="o"/>
+         <dest obj="save_1" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="FEEDBACK" outlet="out"/>
+         <dest obj="looper_FB_mono_1" inlet="feedback"/>
+      </net>
+      <net>
+         <source obj="looper_FB_mono_1" outlet="wave"/>
+         <dest obj="+_1" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="speedlim_1" outlet="out"/>
+         <dest obj="flipflop_1" inlet="trig"/>
+         <dest obj="flipflop_4" inlet="set"/>
+      </net>
+      <net>
+         <source obj="digital_1" outlet="out"/>
+         <dest obj="speedlim_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="obj_2" outlet="L"/>
+         <dest obj="out_1" inlet="left"/>
+      </net>
+      <net>
+         <source obj="+_1" outlet="out"/>
+         <dest obj="saturator_2" inlet="in"/>
+      </net>
+      <net>
+         <source class="axoloti.outlets.OutletInstanceZombie" obj="delay_1" outlet="out"/>
+         <dest obj="obj_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="digital_3" outlet="out"/>
+         <dest obj="speedlim_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="digital_2" outlet="out"/>
+         <dest obj="speedlim_3" inlet="in"/>
+      </net>
+      <net>
+         <source obj="speedlim_2" outlet="out"/>
+         <dest obj="flipflop_4" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="speedlim_3" outlet="out"/>
+         <dest obj="flipflop_2" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="digital_4" outlet="out"/>
+         <dest obj="bool_1" inlet="in"/>
+         <dest obj="buttonFunctions_1" inlet="button"/>
+      </net>
+      <net>
+         <source obj="latch_1" outlet="o"/>
+         <dest obj="bool_2" inlet="in"/>
+         <dest obj="i_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="buttonFunctions_1" outlet="clicks"/>
+         <dest obj="latch_1" inlet="i"/>
+      </net>
+      <net>
+         <source obj="buttonFunctions_1" outlet="update"/>
+         <dest obj="latch_1" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="saturator_1" outlet="out"/>
+         <dest obj="looper_FB_mono_1" inlet="wave"/>
+         <dest obj="+_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="saturator_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="saturator_2" outlet="out"/>
+         <dest class="axoloti.inlets.InletInstanceZombie" obj="delay_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="obj_2" outlet="R"/>
+         <dest obj="out_1" inlet="right"/>
+      </net>
+      <net>
+         <source obj="c_2" outlet="out"/>
+         <dest obj="OLED128x64_1" inlet="line1"/>
+      </net>
+      <net>
+         <source obj="i_2" outlet="out"/>
+         <dest obj="OLED128x64_1" inlet="mode"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>267</x>
+      <y>59</y>
+      <width>1877</width>
+      <height>1173</height>
+   </windowPos>
+</patch-1.0>

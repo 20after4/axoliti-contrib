@@ -1,0 +1,94 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="pedalboard" uuid="15d7cd4d-b1c8-4185-ab43-44967a81610b">
+      <sDescription>sends 6 midi control changes,starting from &apos;startcc&apos;
+
+Credit: robert schirmer</sDescription>
+      <author>Mukunda Modell</author>
+      <license>mit</license>
+      <helpPatch>midi-footswitch-thing.axp</helpPatch>
+      <inlets>
+         <frac32.positive name="cc0"/>
+         <frac32.positive name="cc1"/>
+         <frac32.positive name="cc2"/>
+         <frac32.positive name="cc3"/>
+         <frac32.positive name="cc4"/>
+         <frac32.positive name="cc5"/>
+         <int32 name="startcc"/>
+      </inlets>
+      <outlets/>
+      <displays>
+         <bool32 name="d0" description="CC0 State"/>
+         <bool32 name="d1" description="CC1 State"/>
+         <bool32 name="d2" description="CC2 State"/>
+         <bool32 name="d3" description="CC3 State"/>
+         <bool32 name="d4" description="CC4 State"/>
+         <bool32 name="d5" description="CC5 State"/>
+      </displays>
+      <params>
+         <int32.mini name="startcc">
+            <MinValue i="0"/>
+            <MaxValue i="127"/>
+         </int32.mini>
+      </params>
+      <attribs>
+         <combo name="device">
+            <MenuEntries>
+               <string>din</string>
+               <string>usb host port 1</string>
+               <string>usb host port 2</string>
+               <string>usb host port 3</string>
+               <string>usb host port 4</string>
+               <string>internal port 1</string>
+               <string>internal port 2</string>
+               <string>usb device port 1</string>
+            </MenuEntries>
+            <CEntries>
+               <string>MIDI_DEVICE_DIN, 1</string>
+               <string>MIDI_DEVICE_USB_HOST, 1</string>
+               <string>MIDI_DEVICE_USB_HOST, 2</string>
+               <string>MIDI_DEVICE_USB_HOST, 3</string>
+               <string>MIDI_DEVICE_USB_HOST, 4</string>
+               <string>MIDI_DEVICE_INTERNAL, 1</string>
+               <string>MIDI_DEVICE_INTERNAL, 2</string>
+               <string>MIDI_DEVICE_USB_DEVICE, 1</string>
+            </CEntries>
+         </combo>
+         <spinner name="channel" MinValue="1" MaxValue="16" DefaultValue="0"/>
+      </attribs>
+      <code.declaration><![CDATA[uint32_t prev0;
+uint32_t prev1;
+uint32_t prev2;
+uint32_t prev3;
+uint32_t prev4;
+uint32_t prev5;]]></code.declaration>
+      <code.krate><![CDATA[if (inlet_cc0 != prev0) {
+      MidiSend3((midi_device_t) attr_device, MIDI_CONTROL_CHANGE + (attr_channel-1),0 + inlet_startcc + param_startcc,inlet_cc0 >>20);prev0 = inlet_cc0;
+      disp_d0 = inlet_cc0;
+}
+
+if (inlet_cc1 != prev1) {
+      MidiSend3((midi_device_t) attr_device, MIDI_CONTROL_CHANGE + (attr_channel-1),1 + inlet_startcc + param_startcc,inlet_cc1 >>20);prev1 = inlet_cc1;
+      disp_d1 = inlet_cc1;
+}
+
+if (inlet_cc2 != prev2) {
+      MidiSend3((midi_device_t) attr_device, MIDI_CONTROL_CHANGE + (attr_channel-1),2 + inlet_startcc + param_startcc,inlet_cc2 >>20);prev2 = inlet_cc2;
+      disp_d2 = inlet_cc2;
+}
+
+if (inlet_cc3 != prev3) {
+      MidiSend3((midi_device_t) attr_device, MIDI_CONTROL_CHANGE + (attr_channel-1),3 + inlet_startcc + param_startcc,inlet_cc3 >>20);prev3 = inlet_cc3;
+      disp_d3 = inlet_cc3;
+}
+
+if (inlet_cc4 != prev4) {
+      MidiSend3((midi_device_t) attr_device, MIDI_CONTROL_CHANGE + (attr_channel-1),4 + inlet_startcc + param_startcc,inlet_cc4 >>20);prev4 = inlet_cc4;
+      disp_d4 = inlet_cc4;
+}
+
+if (inlet_cc5 != prev5) {
+      MidiSend3((midi_device_t) attr_device, MIDI_CONTROL_CHANGE + (attr_channel-1),5 + inlet_startcc + param_startcc,inlet_cc5 >>20);prev5 = inlet_cc5;
+      disp_d5 = inlet_cc5;
+}]]></code.krate>
+   </obj.normal>
+</objdefs>

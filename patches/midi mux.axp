@@ -1,0 +1,118 @@
+<patch-1.0 appVersion="1.0.8">
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_2" x="252" y="84">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="252" y="140">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="127"/>
+      </attribs>
+   </obj>
+   <obj type="midi/out/cc any" uuid="d49b3be79ccfae03f0630feecafe683b0e9507d4" name="cc_1" x="700" y="322">
+      <params/>
+      <attribs>
+         <combo attributeName="device" selection="din"/>
+      </attribs>
+   </obj>
+   <obj type="gpio/in/digital" uuid="f59f139e8da912742832dc541157f20f30b7ac1b" name="digital_1" x="42" y="350">
+      <params/>
+      <attribs>
+         <combo attributeName="pad" selection="PC0"/>
+         <combo attributeName="mode" selection="pulldown"/>
+      </attribs>
+   </obj>
+   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="bool_1" x="238" y="350">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/toggle" uuid="f42f0d3aab552c17bc78b9e65f85dc24f977503d" name="toggle_1" x="140" y="364">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/ibar 16" uuid="302bfed4cde8894229679ce81f6b8a5c5212dd98" name="ibar_1" x="392" y="406">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/in/digital" uuid="f59f139e8da912742832dc541157f20f30b7ac1b" name="digital_2" x="42" y="420">
+      <params/>
+      <attribs>
+         <combo attributeName="pad" selection="PC1"/>
+         <combo attributeName="mode" selection="pulldown"/>
+      </attribs>
+   </obj>
+   <obj type="logic/change" uuid="42071f8cb4cfe1f35956c0bd5a313a57e049bec4" name="change_1" x="210" y="448">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/in/digital" uuid="f59f139e8da912742832dc541157f20f30b7ac1b" name="digital_3" x="42" y="490">
+      <params/>
+      <attribs>
+         <combo attributeName="pad" selection="PC2"/>
+         <combo attributeName="mode" selection="pulldown"/>
+      </attribs>
+   </obj>
+   <obj type="logic/countersat2" uuid="ac2f83169ae51aaf19acf322affbe56ca1bbf48f" name="countersat2_1" x="392" y="490">
+      <params>
+         <int32 name="maximum" value="5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="gpio/in/digital" uuid="f59f139e8da912742832dc541157f20f30b7ac1b" name="digital_4" x="42" y="560">
+      <params/>
+      <attribs>
+         <combo attributeName="pad" selection="PC3"/>
+         <combo attributeName="mode" selection="pulldown"/>
+      </attribs>
+   </obj>
+   <nets>
+      <net>
+         <source obj="digital_1" outlet="out"/>
+         <dest obj="toggle_1" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="toggle_1" outlet="o"/>
+         <dest obj="bool_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="i_1" outlet="out"/>
+         <dest obj="cc_1" inlet="v"/>
+      </net>
+      <net>
+         <source obj="i_2" outlet="out"/>
+         <dest obj="cc_1" inlet="chan"/>
+      </net>
+      <net>
+         <source obj="digital_3" outlet="out"/>
+         <dest obj="countersat2_1" inlet="dec"/>
+      </net>
+      <net>
+         <source obj="countersat2_1" outlet="o"/>
+         <dest obj="ibar_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="digital_2" outlet="out"/>
+         <dest obj="change_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="change_1" outlet="trig"/>
+         <dest obj="countersat2_1" inlet="inc"/>
+      </net>
+      <net>
+         <source obj="ibar_1" outlet="chain_out"/>
+         <dest obj="cc_1" inlet="cc"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>713</x>
+      <y>223</y>
+      <width>1048</width>
+      <height>816</height>
+   </windowPos>
+</patch-1.0>
